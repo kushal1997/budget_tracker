@@ -4,11 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Budget Tracker</title>
 
+    <link rel="icon" type="image/x-icon" href="./images/budget.png">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <main>
+        <div class="outerWrap">
+            <div class="innerWrap">
+                <section class="heading">
+                    <p class="title">Budget Tracker</p>
+                    <p class="subtitile">Manage all your expenses in a simpler way</p>
+
+                </section>
+                <section class="transactionControl">
+                    <div class="actions">
+                        <h3>Add Transaction</h3>
+                        <form class="add">
+                            <input type="text" name="sourse" placeholder="Sourse" autocomplete="off">
+                            <input type="number" name="amount" placeholder="Amount" autocomplete="off">
+                            <input type="submit" value="Add Transaction">
+                        </form>
+                    </div>
+                    <div class="stats">
+                        <h3>Statistics</h3>
+                        <p class="balance">
+                            Balance: ₹ <span id="balance">2000</span>
+                        </p>
+                        <p class="income">
+                            Income: ₹ <span id="balance">3000</span>
+                        </p>
+                        <p class="expense">
+                            Expense: ₹ <span id="balance">1000</span>
+                        </p>
+                    </div>
+                
+                </section>
+                <section class="transactionHistory">
+                    <h3>Transaction History</h3>
+                    <div class="income">
+                        <h3>Income</h3>
+                        <ul class="incomeList">
+                            <li data-id="">
+                                <p>
+                                    <span>Pockect Money</span>
+                                    <span>11:28:26 AM 3/3/2023</span>
+                                </p>
+                                <span>₹3000</span>
+                                <i class="bi bi-trash delete"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="expense">
+                        <h3>Expense</h3>
+                        <ul class="expenseList">
+                            <li data-id="">
+                                <p>
+                                    <span>Food</span>
+                                    <span>11:28:26 AM 4/3/2023</span>
+                                </p>
+                                <span>₹1000</span>
+                                <i class="bi bi-trash delete"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </main>
 
 
     <script src="./script.js"></script>
