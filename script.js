@@ -1,7 +1,27 @@
 const form=document.querySelector(".add");
-let transactions = localStorage.getItem("transactions") !== null ? JSON.parse(localStorage.getItem("transactions")) : [];
 const incomeList=document.querySelector("ul.incomeList");
 const expenseList=document.querySelector("ul.expenseList");
+
+const balance=document.getElementById("balance");
+const income=document.getElementById("income");
+const expense=document.getElementById("expense");
+
+let transactions = localStorage.getItem("transactions") !== null ? JSON.parse(localStorage.getItem("transactions")) : [];
+
+function updateStatistics(){
+    const updateIncome=transactions
+                            .filter(transaction => transaction.amount>0)
+                            .reduce((total,transaction) => total+=transaction.amount,0);
+    const updateExpense=transactions
+                            .filter(transaction => transaction.amount<0)
+                            .reduce((total,transaction) => total+=Math.abs(transaction.amount),0);
+    updateBalance=updateIncome-updateExpense;
+    balance.textContent=updateBalance;
+    income.textContent=updateIncome;
+    expense.textContent=updateExpense;
+}
+
+
 
 function generateTemplate(id,source,amount,time){
     return `<li data-id="${id}">
@@ -38,17 +58,52 @@ function addTransaction(source,amount){
 }
 form.addEventListener("submit",event => {
     event.preventDefault();
-    addTransaction(form.source.value,form.amount.value);
+    if(form.source.value.trim()==="" || form.amount.value==="" || form.amount.value==0){
+        return alert("Please Add Proper Values");
+    }
+    addTransaction(form.source.value.trim(),Number(form.amount.value));
     form.reset();
+    updateStatistics();
 })
 
 function getTransaction(){
     transactions.forEach(transaction => {
-        if(transaction.amount>0){
-            incomeList.innerHTML+= generateTemplate(transaction.id,transaction.source,transaction.amount,transaction.time);
-        }else{
-            expenseList.innerHTML+= generateTemplate(transaction.id,transaction.source,transaction.amount,transaction.time);  
+        if(transaction.amount > 0){
+            incomeList.innerHTML += generateTemplate(transaction.id, transaction.source, transaction.amount, transaction.time);
+        } else {
+            expenseList.innerHTML += generateTemplate(transaction.id, transaction.source, transaction.amount, transaction.time);
         }
     });
 }
-getTransaction();
+
+
+function deleteTransaction(id){
+    transactions =transactions.filter(transaction =>{
+        return transaction.id !== id;
+    });
+    localStorage.setItem("transactions",JSON.stringify(transactions));
+    
+}
+
+incomeList.addEventListener("click",event => {
+    if(event.target.classList.contains("delete")){
+        event.target.parentElement.remove();
+        deleteTransaction(Number(event.target.parentElement.dataset.id));
+    }
+    updateStatistics();
+});
+
+expenseList.addEventListener("click",event => {
+    if(event.target.classList.contains("delete")){
+        event.target.parentElement.remove();
+        deleteTransaction(Number(event.target.parentElement.dataset.id));
+    }
+    updateStatistics();
+});
+
+function init(){
+    updateStatistics();
+    getTransaction();
+}
+init();
+
