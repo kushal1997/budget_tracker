@@ -23,7 +23,7 @@ h3{
 }
 
 .outerWrap{
-    width: 100;
+    width: auto;
     min-height: auto;
     background-color: #F5F7FA;
     padding: 30px;
@@ -60,23 +60,34 @@ h3{
     gap: 10px;
     margin: 30px auto;
 }
-.actions, .stats{
+.actions{
     flex-grow: 1;
     background-color: #FFFFFF;
     padding: 20px;
     box-shadow: var(--box-shadow);
     border-radius: 5px;
-    margin: 0px 10px;
+    
+    /* margin-right: auto; */
+    
+}
+.stats{
+    flex-grow: 1;
+    background-color: #FFFFFF;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    margin: 0px auto;
+    
 }
 .actions .add{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: auto;
 }
 .actions .add input{
     font-size: 18px;
     padding: 5px;
-    margin: 10px;
+    margin: 10px;   
 }
 .actions .add input[type="submit"]{
     padding: 7px 15px;
