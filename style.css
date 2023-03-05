@@ -24,7 +24,7 @@ h3{
 
 .outerWrap{
     width: 100;
-    min-height: 100vh;
+    min-height: auto;
     background-color: #F5F7FA;
     padding: 30px;
 }
